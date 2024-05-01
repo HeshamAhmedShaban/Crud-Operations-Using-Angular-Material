@@ -1,11 +1,28 @@
 {
+  "posts": [
+    {
+      "id": "1",
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
   "Employees": [
     {
-      "id": "39d7",
+      "id": "cfe4",
       "firstName": "Hesham",
       "lastName": "Shaban",
       "email": "hesham@gmail.com",
-      "dateOfBirth": "1998-04-07T22:00:00.000Z",
+      "dateOfBirth": "2024-05-05T21:00:00.000Z",
       "gender": "male",
       "education": "Post Graduation",
       "company": "ITI",
@@ -13,25 +30,25 @@
       "package": 12
     },
     {
-      "id": "b7f7",
+      "firstName": "Hesham",
+      "lastName": "Shaban",
+      "email": "heshamshaban@gmail.com",
+      "dateOfBirth": "2024-05-13T21:00:00.000Z",
+      "gender": "male",
+      "education": "Post Graduation",
+      "company": "ITI",
+      "experience": 4,
+      "package": 10,
+      "id": "4d50"
+    },
+    {
+      "id": "bc5a",
       "firstName": "Yousef",
       "lastName": "Sayed",
       "email": "yousefsayed@gmail.com",
       "dateOfBirth": "2024-05-01T21:00:00.000Z",
       "gender": "male",
-      "education": "Diploma",
-      "company": "ITI",
-      "experience": 4,
-      "package": 12
-    },
-    {
-      "id": "1315",
-      "firstName": "Hesham",
-      "lastName": "Shaban",
-      "email": "heshamshaban@gmail.com",
-      "dateOfBirth": "2024-05-05T21:00:00.000Z",
-      "gender": "male",
-      "education": "Post Graduation",
+      "education": "Intermediate",
       "company": "ITI",
       "experience": 4,
       "package": 12

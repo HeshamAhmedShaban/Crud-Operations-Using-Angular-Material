@@ -10,3 +10,8 @@ table {
 td, th {
   width: 25%;
 }
+
+.buttons-container {
+  display: flex;
+}
+
