@@ -10,7 +10,6 @@ import {MatBadgeModule} from '@angular/material/badge';
 
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../../services/employee.service';
-import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -20,15 +19,16 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
-  numberOfEmployees:BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  // numberOfEmployees:BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
+  numberOfEmployees:number=0;
   constructor(private _dialog: MatDialog,private employeeService:EmployeeService) {}
 
 
   ngOnInit(): void {
     this.employeeService.employees$.subscribe(employees => {
-      this.numberOfEmployees.next(employees.length)
-    })
+      this.numberOfEmployees = employees.length;
+    });
   }
 
 

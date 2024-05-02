@@ -48,33 +48,61 @@ this.employeeForm=this.formBulder.group({
     this.employeeForm.patchValue(this.editData);
   }
 
-  FormSubmit(){
-  if(this.employeeForm.valid){
-    if(this.editData){
-      this.serviceEmployee.updateEmployee(this.editData.id,this.employeeForm.value).subscribe({
-        next:(res)=>{
+//   FormSubmit(){
+//   if(this.employeeForm.valid){
+//     if(this.editData){
+//       this.serviceEmployee.updateEmployee(this.editData.id,this.employeeForm.value).subscribe({
+//         next:(res)=>{
           // alert("Employee updated successfully")
-          this.actionService.openSnackBar("Employee updated successfully")
+//           this.actionService.openSnackBar("Employee updated successfully")
+//           this.dialogRef.close(true);
+//         },
+//         error:(err)=>{
+//           alert("Error while adding the employee"+" "+err)
+//         }
+//       });
+//     }else{
+//       this.serviceEmployee.addEmpolyee(this.employeeForm.value).subscribe({
+//         next:(res)=>{
+          // alert("Employee added successfully")
+//           this.actionService.openSnackBar("Employee added successfully")
+//           this.dialogRef.close(true);
+//         },
+//         error:(err)=>{
+//           alert("Error while adding the employee"+" "+err)
+//         }
+//       });
+//     }
+    
+//   }
+//   }
+// }
+
+FormSubmit(): void {
+  if (this.employeeForm.valid) {
+    if (this.editData) {
+      this.serviceEmployee.updateEmployee(this.editData.id, this.employeeForm.value).subscribe({
+        next: (res) => {
+          this.actionService.openSnackBar("Employee updated successfully"); 
           this.dialogRef.close(true);
+          this.serviceEmployee.updateEmployees(); // Emit new value for employees$
         },
-        error:(err)=>{
-          alert("Error while adding the employee"+" "+err)
+        error: (err) => {
+          alert("Error while updating the employee" + " " + err);
         }
       });
-    }else{
+    } else {
       this.serviceEmployee.addEmpolyee(this.employeeForm.value).subscribe({
-        next:(res)=>{
-          // alert("Employee added successfully")
-          this.actionService.openSnackBar("Employee added successfully")
+        next: (res) => {
+          this.actionService.openSnackBar("Employee added successfully");
           this.dialogRef.close(true);
+          this.serviceEmployee.updateEmployees(); // Emit new value for employees$
         },
-        error:(err)=>{
-          alert("Error while adding the employee"+" "+err)
+        error: (err) => {
+          alert("Error while adding the employee" + " " + err);
         }
       });
     }
-    
-  }
   }
 }
-
+}

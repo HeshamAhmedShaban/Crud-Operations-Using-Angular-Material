@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { IEmployee } from '../models/interfaces/iemployee';
-import { log } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +11,22 @@ export class EmployeeService {
   private employeesSubject: BehaviorSubject<IEmployee[]> = new BehaviorSubject<IEmployee[]>([]);
   public employees$: Observable<IEmployee[]> = this.employeesSubject.asObservable();
 
+  // private numberOfEmployeesSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  // public numberOfEmployees$: Observable<number> = this.numberOfEmployeesSubject.asObservable();
 
   constructor(private _http: HttpClient) {
     this.getEmployees().subscribe(employees => {
       this.employeesSubject.next(employees);
+      // this.numberOfEmployeesSubject.next(employees.length);
     });
   }
 //Get All Employees
   getEmployees():Observable<IEmployee[]>{
     return this._http.get<IEmployee[]>("http://localhost:3000/Employees")
+  }
+
+  getEmployeeCount():Observable<number>{
+    return this.employees$.pipe(map(employees => employees.length))
   }
 //Add Employee
   addEmpolyee(data:IEmployee):Observable<IEmployee>{
@@ -34,6 +40,26 @@ export class EmployeeService {
 
   //Delete Employee
   deleteEmployee(id:string):Observable<IEmployee>{
-    return this._http.delete<IEmployee>(`http://localhost:3000/Employees/${id}`)
+    return this._http.delete<IEmployee>(`http://localhost:3000/Employees/${id}`).pipe(
+      tap(()=>{
+        this.notifyEmployeeDeleted(id);
+      })
+    )
+  }
+
+  updateEmployees(): void {
+    this.getEmployees().subscribe(employees => {
+      this.employeesSubject.next(employees);
+    });
+  }
+
+  // notifyEmployeeDeleted() {
+  //   this.numberOfEmployeesSubject.next(this.numberOfEmployeesSubject.value - 1);
+  // }
+
+
+  notifyEmployeeDeleted(id:string) {
+    const currentEmployees = this.employeesSubject.getValue();
+    this.employeesSubject.next(currentEmployees.filter(emp => emp.id !== id));
   }
 }

@@ -52,15 +52,35 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
   }
   
 
-  deleteEmployee(id:string){
+  // deleteEmployee(id:string){
+  //   this._serviceEmployee.deleteEmployee(id).subscribe({
+  //     next:(data)=>{
+  //       this.actionService.openSnackBar("Employee deleted successfully")
+  //       this.dialogRef.closeAll();
+  //       this._serviceEmployee.notifyEmployeeDeleted();
+  //       this.getAllEmployees()
+  //     }
+  //   })
+  // }
+
+  deleteEmployee(id: string) {
     this._serviceEmployee.deleteEmployee(id).subscribe({
-      next:(data)=>{
-        // alert("Employee deleted successfully")
-        this.actionService.openSnackBar("Employee deleted successfully")
-        this.getAllEmployees()
+      next: (res) => {
+        this.actionService.openSnackBar("Employee deleted successfully");
+  
+        // Decrement the number of employees
+        this.dataSource.data = this.dataSource.data.filter(emp => emp.id !== id);
+  
+        // Notify EmployeeService of the deletion
+        this._serviceEmployee.notifyEmployeeDeleted(id);
+  
+        // Refresh the table
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
-    })
+    });
   }
+
 
   openEditForm(data:IEmployee){
     this.dialogRef.open(AddEditEmployeeComponent,{
