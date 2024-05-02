@@ -6,29 +6,34 @@
     <div class="row">
       <mat-form-field appearance="outline" class="example-form-field">
         <mat-label>First Name</mat-label>
-        <input matInput type="text" placeholder="Enter First Name" formControlName="firstName">
+        <input matInput type="text" placeholder="Enter First Name" formControlName="firstName" appValidation="required">
+        <mat-error *ngIf="firstName?.hasError('required')">First Name is required</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="example-form-field">
         <mat-label>Last Name</mat-label>
-        <input matInput type="text" placeholder="Enter Last Name" formControlName="lastName">
+        <input matInput type="text" placeholder="Enter Last Name" formControlName="lastName" appValidation="required">
+        <mat-error *ngIf="lastName?.hasError('required')">Last Name is required</mat-error>
       </mat-form-field>
     </div>
     <div class="row">
       <mat-form-field appearance="outline" class="example-form-field">
         <mat-label>Email</mat-label>
-        <input matInput type="text" placeholder="Enter Email" formControlName="email">
+        <input matInput type="text" placeholder="Enter Email" formControlName="email" [appValidation]="'pattern'">
+        <mat-error *ngIf="email?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="email?.hasError('pattern')">Invalid email format</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="example-form-field">
         <mat-label>Date of Birth</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" placeholder="Choose a date" appValidation="required">
+        <mat-error *ngIf="dateOfBirth?.hasError('required')">Date of Birth is required</mat-error>
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
   <div class="row">
-    <mat-radio-group aria-label="Select an option" formControlName="gender">
-      <mat-label><b>Gender</b></mat-label>
+    <mat-radio-group aria-label="Select an option" formControlName="gender" appValidation="required" >
+      <mat-label><b>Select Gender</b></mat-label>
       <mat-radio-button value="male">Male</mat-radio-button>
       <mat-radio-button value="female">Female</mat-radio-button>
     </mat-radio-group>
@@ -36,7 +41,8 @@
   <div class="row">
     <mat-form-field appearance="outline" class="example-form-field">
       <mat-label>Education</mat-label>
-      <mat-select formControlName="education">
+      <mat-select formControlName="education" appValidation="required">
+        <mat-error *ngIf="educationInput?.hasError('required')">Education is required</mat-error>
         @for (item of education; track item) {
           <mat-option [value]="item">{{item}}</mat-option>
         }
@@ -44,17 +50,20 @@
     </mat-form-field>
     <mat-form-field appearance="outline" class="example-form-field">
       <mat-label>Company</mat-label>
-      <input matInput type="text" placeholder="Enter Company Name" formControlName="company">
+      <input matInput type="text" placeholder="Enter Company Name" formControlName="company" appValidation="required">
+      <mat-error *ngIf="company?.hasError('required')">Company is required</mat-error>
     </mat-form-field>
   </div>
   <div class="row">
     <mat-form-field appearance="outline" class="example-form-field">
       <mat-label>Experiancy</mat-label>
-      <input matInput type="number" placeholder="Enter your experiancy" formControlName="experience">
+      <input matInput type="number" placeholder="Enter your experiancy" formControlName="experience" appValidation="required">
+      <mat-error *ngIf="experience?.hasError('required')">Experience is required</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" class="example-form-field">
       <mat-label>Package</mat-label>
-      <input matInput type="number" placeholder="Enter your Package" formControlName="package">
+      <input matInput type="number" placeholder="Enter your Package" formControlName="package" appValidation="required">
+      <mat-error *ngIf="package?.hasError('required')">Package is required</mat-error>
       <mat-hint>In rupees</mat-hint>
     </mat-form-field>
   </div>

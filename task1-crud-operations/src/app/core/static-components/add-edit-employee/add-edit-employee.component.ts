@@ -14,12 +14,13 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { IEmployee } from '../../models/interfaces/iemployee';
 import { ActionService } from '../../services/action.service';
+import { ValidationDirective } from '../../../shared/directives/validation.directive';
 
 @Component({
   selector: 'app-add-edit-employee',
   standalone: true,
   providers:[provideNativeDateAdapter()],
-  imports: [CommonModule,FormsModule,MatDialogModule,MatRadioModule,MatDatepickerModule,MatNativeDateModule,MatButtonModule,MatFormFieldModule,MatSelectModule,MatSnackBarModule,MatInputModule,MatFormFieldModule,ReactiveFormsModule],
+  imports: [CommonModule,FormsModule,MatDialogModule,MatRadioModule,MatDatepickerModule,MatNativeDateModule,MatButtonModule,MatFormFieldModule,MatSelectModule,MatSnackBarModule,MatInputModule,MatFormFieldModule,ReactiveFormsModule,ValidationDirective],
   templateUrl: './add-edit-employee.component.html',
   styleUrl: './add-edit-employee.component.css'
 })
@@ -34,7 +35,7 @@ constructor(private formBulder:FormBuilder,private serviceEmployee:EmployeeServi
 this.employeeForm=this.formBulder.group({
   firstName:['',Validators.required],
   lastName:['',Validators.required],
-  email:['',Validators.required],
+  email: ['', [Validators.required]],
   dateOfBirth:['',Validators.required],
   gender:['',Validators.required],
   education:['',Validators.required],
@@ -42,6 +43,41 @@ this.employeeForm=this.formBulder.group({
   experience:['',Validators.required],
   package:['',Validators.required],
 })
+}
+
+public get firstName(){
+  return this.employeeForm.get('firstName');
+}
+
+public get lastName(){
+  return this.employeeForm.get('lastName');
+}
+
+public get email(){
+  return this.employeeForm.get('email');
+}
+
+public get dateOfBirth(){
+  return this.employeeForm.get('dateOfBirth');
+}
+public get gender(){
+  return this.employeeForm.get('gender');
+}
+
+public get educationInput(){
+  return this.employeeForm.get('education');
+}
+
+public get company(){
+  return this.employeeForm.get('company');
+}
+
+public get experience(){
+  return this.employeeForm.get('experience');
+}
+
+public get package(){
+  return this.employeeForm.get('package');
 }
 
   ngOnInit(): void {
