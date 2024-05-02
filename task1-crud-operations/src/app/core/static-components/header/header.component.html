@@ -1,6 +1,11 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span class="example-spacer text-center">CRUD Operations</span>
-    <span class="text-center"></span>
-    <button mat-raised-button color="primary" class="bg-light text-dark font-weight-bold" (click)="openAddEdditEmployeeForm()">Add Employee</button>
+    <span class="example-spacer">CRUD Operations</span>
+    <div class="centered-div">
+      <span [matBadge]="numberOfEmployees | async" matBadgeOverlap="false" class="badge text-white">Number Of Employee</span>
+    </div>
+    <button mat-icon-button aria-label="Add Employee" (click)="openAddEdditEmployeeForm()">
+      <mat-icon>add</mat-icon>
+    </button>
   </mat-toolbar-row>
+</mat-toolbar>

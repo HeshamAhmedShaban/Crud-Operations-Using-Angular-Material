@@ -1,3 +1,23 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+
+div{
+  color: white;
+  margin-right: 50px;
+}
+.centered-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: white; */
+}
+
