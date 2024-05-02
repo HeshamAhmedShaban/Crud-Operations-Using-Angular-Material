@@ -20,12 +20,12 @@ import { ActionService } from '../../core/services/action.service';
   styleUrl: './employee-list.component.css'
 })
 export class EmployeeListComponent implements OnInit  {
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'dateOfBirth', 'gender', 'education', 'company', 'experience', 'package','actions'];
-  dataSource!: MatTableDataSource<IEmployee>;
+  public displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'dateOfBirth', 'gender', 'education', 'company', 'experience', 'package','actions'];
+  public dataSource!: MatTableDataSource<IEmployee>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialog,private actionService:ActionService) {}
+constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialog,private actionService:ActionService) {} 
 
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
     this.getAllEmployees()
   }
 
-  getAllEmployees(){
+  public getAllEmployees(){
     this._serviceEmployee.getEmployees().subscribe({
       next: (data: IEmployee | IEmployee[]) => {
         if (Array.isArray(data)) {
@@ -52,7 +52,7 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
   }
   
 
-  // deleteEmployee(id:string){
+  // public deleteEmployee(id:string){
   //   this._serviceEmployee.deleteEmployee(id).subscribe({
   //     next:(data)=>{
   //       this.actionService.openSnackBar("Employee deleted successfully")
@@ -63,7 +63,7 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
   //   })
   // }
 
-  deleteEmployee(id: string) {
+  public deleteEmployee(id: string) {
     this._serviceEmployee.deleteEmployee(id).subscribe({
       next: (res) => {
         this.actionService.openSnackBar("Employee deleted successfully");
@@ -82,14 +82,14 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
   }
 
 
-  openEditForm(data:IEmployee){
+  public openEditForm(data:IEmployee){
     this.dialogRef.open(AddEditEmployeeComponent,{
       data,
     });
 
   }
 
-  applyFilter(event: Event) {
+  public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 

@@ -21,25 +21,25 @@ export class EmployeeService {
     });
   }
 //Get All Employees
-  getEmployees():Observable<IEmployee[]>{
+  public getEmployees():Observable<IEmployee[]>{
     return this._http.get<IEmployee[]>("http://localhost:3000/Employees")
   }
 
-  getEmployeeCount():Observable<number>{
+  public getEmployeeCount():Observable<number>{
     return this.employees$.pipe(map(employees => employees.length))
   }
 //Add Employee
-  addEmpolyee(data:IEmployee):Observable<IEmployee>{
+  public addEmpolyee(data:IEmployee):Observable<IEmployee>{
     return this._http.post<IEmployee>("http://localhost:3000/Employees",data)
   }
 
   //Update Employee
-  updateEmployee(id:string,data:any):Observable<IEmployee>{
+  public updateEmployee(id:string,data:any):Observable<IEmployee>{
     return this._http.put<IEmployee>(`http://localhost:3000/Employees/${id}`,data)
   }
 
   //Delete Employee
-  deleteEmployee(id:string):Observable<IEmployee>{
+  public deleteEmployee(id:string):Observable<IEmployee>{
     return this._http.delete<IEmployee>(`http://localhost:3000/Employees/${id}`).pipe(
       tap(()=>{
         this.notifyEmployeeDeleted(id);
@@ -47,7 +47,7 @@ export class EmployeeService {
     )
   }
 
-  updateEmployees(): void {
+  public updateEmployees(): void {
     this.getEmployees().subscribe(employees => {
       this.employeesSubject.next(employees);
     });
@@ -58,7 +58,7 @@ export class EmployeeService {
   // }
 
 
-  notifyEmployeeDeleted(id:string) {
+  public notifyEmployeeDeleted(id:string) {
     const currentEmployees = this.employeesSubject.getValue();
     this.employeesSubject.next(currentEmployees.filter(emp => emp.id !== id));
   }

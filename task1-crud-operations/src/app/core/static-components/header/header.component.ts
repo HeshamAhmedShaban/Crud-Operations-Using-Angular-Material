@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
 
   // numberOfEmployees:BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  numberOfEmployees:number=0;
+  public numberOfEmployees:number=0;
   constructor(private _dialog: MatDialog,private employeeService:EmployeeService) {}
 
 
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  openAddEdditEmployeeForm() {
+  public openAddEdditEmployeeForm() {
     this._dialog.open(AddEditEmployeeComponent)
   }
 }

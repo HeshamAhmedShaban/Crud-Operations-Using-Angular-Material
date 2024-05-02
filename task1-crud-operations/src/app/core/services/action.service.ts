@@ -9,7 +9,7 @@ export class ActionService {
   constructor(private _snackBar: MatSnackBar) { }
 
 
-  openSnackBar(message: string, action: string = 'OK') {
+  public openSnackBar(message: string, action: string = 'OK') {
     this._snackBar.open(message, action, {
       duration: 2000,
     });

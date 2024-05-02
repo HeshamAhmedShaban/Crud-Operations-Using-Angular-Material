@@ -27,7 +27,7 @@ export class AddEditEmployeeComponent implements OnInit {
 
 education:string[]=["Matric","Diploma","Intermediate","Graduation","Post Graduation"];
 
-employeeForm:FormGroup;
+public employeeForm:FormGroup;
 
 constructor(private formBulder:FormBuilder,private serviceEmployee:EmployeeService,private dialogRef:MatDialogRef<AddEditEmployeeComponent>,
   @Inject(MAT_DIALOG_DATA) public editData: IEmployee,private actionService:ActionService){
@@ -48,7 +48,7 @@ this.employeeForm=this.formBulder.group({
     this.employeeForm.patchValue(this.editData);
   }
 
-//   FormSubmit(){
+//   public FormSubmit(){
 //   if(this.employeeForm.valid){
 //     if(this.editData){
 //       this.serviceEmployee.updateEmployee(this.editData.id,this.employeeForm.value).subscribe({
@@ -78,7 +78,7 @@ this.employeeForm=this.formBulder.group({
 //   }
 // }
 
-FormSubmit(): void {
+public FormSubmit(): void {
   if (this.employeeForm.valid) {
     if (this.editData) {
       this.serviceEmployee.updateEmployee(this.editData.id, this.employeeForm.value).subscribe({
