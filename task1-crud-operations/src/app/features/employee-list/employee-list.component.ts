@@ -12,6 +12,8 @@ import { IEmployee } from '../../core/models/interfaces/iemployee';
 import { AddEditEmployeeComponent } from '../../core/static-components/add-edit-employee/add-edit-employee.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActionService } from '../../core/services/action.service';
+import { tap } from 'rxjs';
+
 @Component({
   selector: 'app-employee-list',
   standalone: true,
@@ -37,7 +39,7 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
     this.getAllEmployees()
   }
 
-  public getAllEmployees(){
+  public getAllEmployees() {
     this._serviceEmployee.getEmployees().subscribe({
       next: (data: IEmployee | IEmployee[]) => {
         if (Array.isArray(data)) {
@@ -48,7 +50,7 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       }
-    })
+    });
   }
   
 

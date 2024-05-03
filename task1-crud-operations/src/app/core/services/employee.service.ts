@@ -8,6 +8,8 @@ import { IEmployee } from '../models/interfaces/iemployee';
 })
 export class EmployeeService {
 
+  _url:string='http://localhost:3000/Employees';
+
   private employeesSubject: BehaviorSubject<IEmployee[]> = new BehaviorSubject<IEmployee[]>([]);
   public employees$: Observable<IEmployee[]> = this.employeesSubject.asObservable();
 
@@ -22,7 +24,7 @@ export class EmployeeService {
   }
 //Get All Employees
   public getEmployees():Observable<IEmployee[]>{
-    return this._http.get<IEmployee[]>("http://localhost:3000/Employees")
+    return this._http.get<IEmployee[]>(`${this._url}`)
   }
 
   public getEmployeeCount():Observable<number>{
@@ -30,17 +32,17 @@ export class EmployeeService {
   }
 //Add Employee
   public addEmpolyee(data:IEmployee):Observable<IEmployee>{
-    return this._http.post<IEmployee>("http://localhost:3000/Employees",data)
+    return this._http.post<IEmployee>(`${this._url}`,data)
   }
 
   //Update Employee
   public updateEmployee(id:string,data:any):Observable<IEmployee>{
-    return this._http.put<IEmployee>(`http://localhost:3000/Employees/${id}`,data)
+    return this._http.put<IEmployee>(`${this._url}/${id}`,data)
   }
 
   //Delete Employee
   public deleteEmployee(id:string):Observable<IEmployee>{
-    return this._http.delete<IEmployee>(`http://localhost:3000/Employees/${id}`).pipe(
+    return this._http.delete<IEmployee>(`${this._url}/${id}`).pipe(
       tap(()=>{
         this.notifyEmployeeDeleted(id);
       })
