@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
@@ -9,11 +9,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
-import { EmployeeService } from '../../services/employee.service';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { IEmployee } from '../../models/interfaces/iemployee';
 import { ActionService } from '../../services/action.service';
+import { EmployeeService } from '../../services/employee.service';
 import { ValidationDirective } from '../../../shared/directives/validation.directive';
 
 @Component({

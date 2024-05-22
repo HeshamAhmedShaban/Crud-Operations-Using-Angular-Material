@@ -12,7 +12,7 @@ import { IEmployee } from '../../core/models/interfaces/iemployee';
 import { AddEditEmployeeComponent } from '../../core/static-components/add-edit-employee/add-edit-employee.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActionService } from '../../core/services/action.service';
-import { tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-employee-list',
@@ -27,7 +27,9 @@ export class EmployeeListComponent implements OnInit  {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialog,private actionService:ActionService) {} 
+  @ViewChild(AddEditEmployeeComponent)data!:AddEditEmployeeComponent;
+  apiURL: string = 'https://projectapi.gerasim.in/api/BudgetPlanner/';
+constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialog,private actionService:ActionService, private http : HttpClient) {}
 
 
   ngOnInit(): void {
@@ -51,8 +53,9 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
         this.dataSource.paginator = this.paginator;
       }
     });
+    this.getAllTransactionType()
   }
-  
+
 
   // public deleteEmployee(id:string){
   //   this._serviceEmployee.deleteEmployee(id).subscribe({
@@ -69,13 +72,13 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
     this._serviceEmployee.deleteEmployee(id).subscribe({
       next: (res) => {
         this.actionService.openSnackBar("Employee deleted successfully");
-  
+
         // Decrement the number of employees
         this.dataSource.data = this.dataSource.data.filter(emp => emp.id !== id);
-  
+
         // Notify EmployeeService of the deletion
         this._serviceEmployee.notifyEmployeeDeleted(id);
-  
+
         // Refresh the table
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -99,5 +102,17 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
       this.dataSource.paginator.firstPage();
     }
   }
+
+public getAllTransactionType(){
+  return this.http.get<any>(`${this.apiURL}getAllTransactionType`).subscribe({
+    next:(data)=>{
+      console.log(data)
+    }
+  })
 }
+
+
+
+}
+
 
