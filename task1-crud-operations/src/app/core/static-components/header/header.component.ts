@@ -4,10 +4,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialog} from '@angular/material/dialog';
-import { AddEditEmployeeComponent } from '../add-edit-employee/add-edit-employee.component';
-import { FormsModule } from '@angular/forms';
 import {MatBadgeModule} from '@angular/material/badge';
 
+import { AddEditEmployeeComponent } from '../add-edit-employee/add-edit-employee.component';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../../services/employee.service';
 @Component({
