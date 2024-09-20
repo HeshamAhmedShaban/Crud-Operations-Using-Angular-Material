@@ -7,7 +7,7 @@ import { AbstractControl, ValidationErrors, Validator, Validators } from '@angul
 })
 export class ValidationDirective implements Validator {
 
-  
+
 
   @Input('appValidation') appValidation!: string | RegExp;
 

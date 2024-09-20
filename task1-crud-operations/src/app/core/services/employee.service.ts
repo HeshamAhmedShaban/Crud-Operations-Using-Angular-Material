@@ -55,11 +55,6 @@ export class EmployeeService {
     });
   }
 
-  // notifyEmployeeDeleted() {
-  //   this.numberOfEmployeesSubject.next(this.numberOfEmployeesSubject.value - 1);
-  // }
-
-
   public notifyEmployeeDeleted(id:string) {
     const currentEmployees = this.employeesSubject.getValue();
     this.employeesSubject.next(currentEmployees.filter(emp => emp.id !== id));

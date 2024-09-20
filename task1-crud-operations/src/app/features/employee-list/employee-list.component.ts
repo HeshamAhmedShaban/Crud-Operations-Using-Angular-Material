@@ -13,7 +13,7 @@ import { AddEditEmployeeComponent } from '../../core/static-components/add-edit-
 import { MatDialog } from '@angular/material/dialog';
 import { ActionService } from '../../core/services/action.service';
 import { HttpClient } from '@angular/common/http';
-import { log } from 'node:console';
+import { combineLatest, fromEvent, interval, map } from 'rxjs';
 
 @Component({
   selector: 'app-employee-list',
@@ -37,7 +37,8 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     })
-    this.getAllEmployees()
+    this.getAllEmployees();
+    // this.search();
   }
 
   public getAllEmployees() {
@@ -88,6 +89,26 @@ constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialo
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+
+
+
+  private search(){
+    let inputSearch=document.getElementById('search') ;
+
+    let timer$=interval(1000);
+
+    let clicks$=fromEvent<InputEvent>(inputSearch  as HTMLInputElement , 'input')
+
+    const combined$ = combineLatest([clicks$, timer$]).pipe(
+      map(([click, timer]) => {
+        const target = click.target as HTMLInputElement;
+        return `Wright at ${target.value}, ${target.value} and timer: ${timer}`;
+      })
+    ); 
+
+    combined$.subscribe(console.log);  
   }
 
 
