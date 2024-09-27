@@ -16,5 +16,18 @@
   "profile": {
     "name": "typicode"
   },
-  "Employees": []
+  "Employees": [
+    {
+      "id": "16fb",
+      "firstName": "Hesham",
+      "lastName": "Shaban",
+      "email": "hesham@gmail.com",
+      "dateOfBirth": "2024-09-03T21:00:00.000Z",
+      "gender": "male",
+      "education": "Graduation",
+      "company": "wwa",
+      "experience": 1,
+      "package": 1
+    }
+  ]
 }

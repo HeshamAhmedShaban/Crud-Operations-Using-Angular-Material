@@ -10,6 +10,7 @@ import { AddEditEmployeeComponent } from '../add-edit-employee/add-edit-employee
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../../services/employee.service';
+import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -19,15 +20,15 @@ import { EmployeeService } from '../../services/employee.service';
 })
 export class HeaderComponent implements OnInit {
 
-  // numberOfEmployees:BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  numberOfEmployees:BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  public numberOfEmployees:number=0;
+  // public numberOfEmployees:number=0;
   constructor(private _dialog: MatDialog,private employeeService:EmployeeService) {}
 
 
   ngOnInit(): void {
     this.employeeService.employees$.subscribe(employees => {
-      this.numberOfEmployees = employees.length;
+      this.numberOfEmployees.next(employees.length);
     });
   }
 

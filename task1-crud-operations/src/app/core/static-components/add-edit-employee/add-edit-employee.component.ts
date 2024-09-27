@@ -82,6 +82,8 @@ public get package(){
 
   ngOnInit(): void {
     this.employeeForm.patchValue(this.editData);
+    console.log(this.employeeForm.patchValue(this.editData));
+    
   }
 
 //   public FormSubmit(){
@@ -128,6 +130,7 @@ public FormSubmit(): void {
         }
       });
     } else {
+      debugger;
       this.serviceEmployee.addEmpolyee(this.employeeForm.value).subscribe({
         next: (res) => {
           this.actionService.openSnackBar("Employee added successfully");
