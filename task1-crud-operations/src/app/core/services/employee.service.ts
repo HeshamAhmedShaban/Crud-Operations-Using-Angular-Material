@@ -49,12 +49,14 @@ export class EmployeeService {
     )
   }
 
+  // call this method to update the list of employees
   public updateEmployees(): void {
     this.getEmployees().subscribe(employees => {
       this.employeesSubject.next(employees);
     });
   }
 
+  // call this method to notify that an employee has been deleted
   public notifyEmployeeDeleted(id:string) {
     const currentEmployees = this.employeesSubject.getValue();
     this.employeesSubject.next(currentEmployees.filter(emp => emp.id !== id));

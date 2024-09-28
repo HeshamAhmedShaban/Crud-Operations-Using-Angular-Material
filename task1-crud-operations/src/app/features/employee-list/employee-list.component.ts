@@ -29,7 +29,7 @@ export class EmployeeListComponent implements OnInit  {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(AddEditEmployeeComponent)data!:AddEditEmployeeComponent;
-constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialog,private actionService:ActionService, private http : HttpClient,private ngzone:NgZone) {}
+constructor(private _serviceEmployee: EmployeeService,private dialogRef:MatDialog,private actionService:ActionService) {}
 
   ngOnInit(): void {
     this._serviceEmployee.employees$.subscribe(employees=>{
